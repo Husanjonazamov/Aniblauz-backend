@@ -4,7 +4,9 @@ from django_core.models import AbstractBaseModel
 
 
 class AnimeModel(AbstractBaseModel):
-    name = models.CharField(_("name"), max_length=255)
+    name = models.CharField(_("name"), max_length=255, null=True, blank=True)
+    description = models.TextField(_("description"), null=True, blank=True)
+    anime_id = models.CharField(_("anime"), max_length=255)
 
     def __str__(self):
         return self.name
