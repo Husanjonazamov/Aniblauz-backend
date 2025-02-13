@@ -15,6 +15,11 @@ APPS = [
     "rest_framework_simplejwt",
     "django_core",
     "core.apps.accounts.apps.AccountsConfig",
+    
+    # install apps
+    'core.apps.users',
+    'core.apps.anime',
+    'core.apps.api',
 ]
 
 if env.str("PROJECT_ENV") == "debug":
