@@ -1,10 +1,10 @@
 from django.contrib import admin
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 
 from ..models import AnimeModel, EpisodeModel
 
 
-class EpisodeInline(admin.TabularInline):
+class EpisodeInline(TabularInline):
     model = EpisodeModel
     extra = 1 
 
