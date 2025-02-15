@@ -16,13 +16,14 @@ def generate_anime_url(sender, instance, created, **kwargs):
 
 
 def send_url_to_admin(url):
-    admin_id = ADMIN_ID
+    admin_ids = ADMIN_ID
     message = f"{url}"
     
     telegram_bot_token = TELEGRAM_BOT_TOKEN
     send_message_url = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
     
-    requests.post(send_message_url, data={
-        'chat_id': admin_id,
-        'text': message
-    })
+    for admin_id in admin_ids:
+        requests.post(send_message_url, data={
+            'chat_id': admin_id,
+            'text': message
+        })
