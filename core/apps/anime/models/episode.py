@@ -22,5 +22,5 @@ class EpisodeModel(AbstractBaseModel):
 
     class Meta:
         db_table = "episode"
-        verbose_name = _("EpisodeModel")
-        verbose_name_plural = _("EpisodeModels")
+        verbose_name = _("Anime qismlari")
+        verbose_name_plural = _("Anime qismlari")

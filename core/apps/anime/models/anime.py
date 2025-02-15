@@ -19,5 +19,5 @@ class AnimeModel(AbstractBaseModel):
 
     class Meta:
         db_table = "anime"
-        verbose_name = _("AnimeModel")
-        verbose_name_plural = _("AnimeModels")
+        verbose_name = _("Animelar")
+        verbose_name_plural = _("Animelar")
