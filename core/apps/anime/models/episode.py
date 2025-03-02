@@ -4,9 +4,16 @@ from django_core.models import AbstractBaseModel
 from core.apps.anime.models.anime import AnimeModel
 
 
+import secrets
+import string
+
+def generate_random_id():
+    return ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(8))
+
 class EpisodeModel(AbstractBaseModel):
+    id = models.CharField(primary_key=True, max_length=8, default=generate_random_id, editable=False)
     name = models.CharField(_("name"), max_length=255)
-    anime = models.ForeignKey(AnimeModel, on_delete=models.CASCADE, null=True, blank=True)
+    anime = models.ForeignKey(AnimeModel, related_name="episodes", on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(_("description"))
     episode_id = models.CharField(_("episode"), max_length=255)
     
