@@ -1,3 +1,3 @@
-BOT_URL = 'https://t.me/testuchforbot'
+BOT_URL = 'https://t.me/Aniblauz_yuklashbot'
 ADMIN_ID = 5765144405,6415392394
-TELEGRAM_BOT_TOKEN = '7178118588:AAHtJ8mKY-ChU0yyxiyWhcVogURQwki61_Y'
+TELEGRAM_BOT_TOKEN = '7671074258:AAG61h2dmZgBlOjLpoDT77iqirW1NZ5favY'

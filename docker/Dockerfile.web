@@ -2,7 +2,7 @@ FROM jscorptech/django:v0.5
 
 WORKDIR /code
 
-COPY . .
+COPY . .    
 
 RUN  --mount=type=cache,target=/root/.cache/pip pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -r requirements.txt
 
