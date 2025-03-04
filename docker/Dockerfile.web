@@ -2,8 +2,9 @@ FROM jscorptech/django:v0.5
 
 WORKDIR /code
 
-COPY requirements.txt /code/requirements.txt
+COPY ./ /code
 
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r requirements.txt
+RUN  --mount=type=cache,target=/root/.cache/pip pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -r requirements.txt
+
 
 CMD ["sh", "./resources/scripts/entrypoint.sh"]
