@@ -13,18 +13,23 @@ PAGES = [
         ],
     },
     {
-        "title": _("Auth"),
-        "separator": True,  # Top border
+        "title": _("Anime"),
+        "separator": True,  
         "items": [
             {
-                "title": _("Users"),
-                "icon": "group",
-                "link": reverse_lazy("admin:http_user_changelist"),
+                "title": _("Anime Qismlari"),
+                "icon": "play_arrow",
+                "link": reverse_lazy("admin:anime_episodemodel_changelist"),
             },
             {
-                "title": _("Group"),
-                "icon": "group",
-                "link": reverse_lazy("admin:auth_group_changelist"),
+                "title": _("Animelar"),
+                "icon": "movie",
+                "link": reverse_lazy("admin:anime_animemodel_changelist"),
+            },
+            {
+                "title": _("Foydalanuvchilar"),
+                "icon": "person",
+                "link": reverse_lazy("admin:users_usermodel_changelist"),
             },
         ],
     },
