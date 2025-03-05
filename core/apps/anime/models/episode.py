@@ -3,7 +3,6 @@ from django.utils.translation import gettext_lazy as _
 from django_core.models import AbstractBaseModel
 from core.apps.anime.models.anime import AnimeModel
 
-
 import secrets
 import string
 
@@ -16,7 +15,8 @@ class EpisodeModel(AbstractBaseModel):
     anime = models.ForeignKey(AnimeModel, related_name="episodes", on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(_("description"))
     episode_id = models.CharField(_("episode"), max_length=255)
-    
+    link = models.URLField(_("link"), max_length=500, blank=True, null=True, editable=False)  # Faqat ko'rish uchun
+
 
     def __str__(self):
         return self.name

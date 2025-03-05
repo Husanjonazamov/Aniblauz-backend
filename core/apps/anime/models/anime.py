@@ -8,13 +8,14 @@ import string
 
 def generate_random_id():
     return ''.join(secrets.choice(string.ascii_letters + string.digits) for _ in range(8))
-
+    
 
 class AnimeModel(AbstractBaseModel):
     id = models.CharField(primary_key=True, max_length=8, default=generate_random_id, editable=False)
     name = models.CharField(_("name"), max_length=255, null=True, blank=True)
     description = models.TextField(_("description"), null=True, blank=True)
     anime_id = models.CharField(_("anime"), max_length=255)
+    link = models.URLField(_("link"), max_length=500, blank=True, null=True, editable=False)
 
     def __str__(self):
         return self.name

@@ -8,17 +8,25 @@ import requests
 @receiver(post_save, sender=AnimeModel)
 def generate_anime_url(sender, instance, created, **kwargs):
     if created:
-        anime_url = f"{instance.name}\n{BOT_URL}?start={instance.id}"
+        anime_url = f"{str(instance.name)}\n{str(BOT_URL)}?start={str(instance.id)}"
+        url = anime_url.split(f"{instance.name}")[1]
+        instance.link = url
+        instance.save()
+        instance._meta.get_field('link').editable = True
+        
         send_url_to_admin(anime_url)
-
         
         
 @receiver(post_save, sender=EpisodeModel)
 def generate_episode_url(sender, instance, created, **kwargs):
     if created:
         episode_url = f"{instance.name}\n{BOT_URL}?start={instance.id}"
+        
+        url = episode_url.split(f"{instance.name}")[1]
+        instance.link = url
+        instance.save()
+        instance._meta.get_field('link').editable = True
         send_url_to_admin(episode_url)
-
         
 
 def send_url_to_admin(url):
