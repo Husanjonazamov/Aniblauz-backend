@@ -16,3 +16,4 @@ class AnimeAdmin(ModelAdmin):
         "__str__",
     )
     inlines = [EpisodeInline]
+    readonly_fields = ('link',)

@@ -10,3 +10,4 @@ class EpisodeAdmin(ModelAdmin):
         "id",
         "__str__",
     )
+    readonly_fields = ('link',)
