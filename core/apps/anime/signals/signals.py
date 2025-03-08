@@ -9,7 +9,8 @@ import requests
 def generate_anime_url(sender, instance, created, **kwargs):
     if created:
         anime_url = f"{str(instance.name)}\n{str(BOT_URL)}?start={str(instance.id)}"
-        url = anime_url.split(f"{instance.name}")[1]
+
+        url = anime_url.split(f"{str(instance.name)}")[1]
         instance.link = url
         instance.save()
         instance._meta.get_field('link').editable = True
@@ -20,9 +21,9 @@ def generate_anime_url(sender, instance, created, **kwargs):
 @receiver(post_save, sender=EpisodeModel)
 def generate_episode_url(sender, instance, created, **kwargs):
     if created:
-        episode_url = f"{instance.name}\n{BOT_URL}?start={instance.id}"
+        episode_url = f"{str(instance.name)}\n{str(BOT_URL)}?start={str(instance.id)}"
         
-        url = episode_url.split(f"{instance.name}")[1]
+        url = episode_url.split(f"{str(instance.name)}")[1]
         instance.link = url
         instance.save()
         instance._meta.get_field('link').editable = True
@@ -30,14 +31,20 @@ def generate_episode_url(sender, instance, created, **kwargs):
         
 
 def send_url_to_admin(url):
-    admin_ids = ADMIN_ID
+    admin_ids = [5765144405,7691756537,1229568290]
     message = f"{url}"
     
     telegram_bot_token = TELEGRAM_BOT_TOKEN
     send_message_url = f"https://api.telegram.org/bot{telegram_bot_token}/sendMessage"
     
-    for admin_id in admin_ids:
-        requests.post(send_message_url, data={
-            'chat_id': admin_id,
-            'text': message
-        })
+    if isinstance(admin_ids, list):
+        for admin_id in admin_ids:
+            try:
+                response = requests.post(send_message_url, data={
+                    'chat_id': admin_id,
+                    'text': message,
+                    'parse_mode': 'HTML'
+                })
+                response.raise_for_status()  
+            except requests.exceptions.RequestException as e:
+                print(f"Error sending message to admin {admin_id}: {e}")
