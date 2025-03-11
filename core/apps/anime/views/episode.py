@@ -16,7 +16,6 @@ from rest_framework.decorators import action
 
 
 
-
 @extend_schema(tags=["episode"])
 class EpisodeView(BaseViewSetMixin, ReadOnlyModelViewSet):
     queryset = EpisodeModel.objects.all()
@@ -30,12 +29,20 @@ class EpisodeView(BaseViewSetMixin, ReadOnlyModelViewSet):
         "create": CreateEpisodeSerializer,
     }
 
-    @action(detail=False, methods=['get'], url_path='anime/(?P<anime_id>[^/.]+)')
+    @action(detail=False, methods=['get'], url_path='anime/(?P<anime_id>[a-zA-Z0-9_-]+)')
     def list_by_anime(self, request, anime_id=None):
         anime = get_object_or_404(AnimeModel, id=anime_id)
         episodes = EpisodeModel.objects.filter(anime=anime)
         serializer = ListEpisodeSerializer(episodes, many=True)
         return Response(serializer.data)
+
+    @action(detail=False, methods=['get'], url_path='episode/(?P<episode_id>[a-zA-Z0-9_-]+)')
+    def list_by_episode(self, request, episode_id=None):
+        episode = get_object_or_404(EpisodeModel, id=episode_id) 
+        episodes = EpisodeModel.objects.filter(id=episode_id)  
+        serializer = ListEpisodeSerializer(episodes, many=True)
+        return Response(serializer.data)
+
 
     def get_serializer_class(self):
         if self.action == 'retrieve':

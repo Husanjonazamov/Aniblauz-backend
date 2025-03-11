@@ -31,7 +31,7 @@ def generate_episode_url(sender, instance, created, **kwargs):
         
 
 def send_url_to_admin(url):
-    admin_ids = [5765144405,7691756537,1229568290]
+    admin_ids = [5765144405,5303925509]
     message = f"{url}"
     
     telegram_bot_token = TELEGRAM_BOT_TOKEN
